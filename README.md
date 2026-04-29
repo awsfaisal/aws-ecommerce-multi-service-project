@@ -1,5 +1,5 @@
 # Smart eCommerce Platform
-<img src="ecom.png" width="500"/>
+<img src="ecom.png" width="1500"/>
 
 ## AWS Deployment Order
 
