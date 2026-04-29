@@ -1,4 +1,5 @@
-# Google Services Lab - Production Notes
+# Smart eCommerce Platform
+<img src="ecom.png" width="500"/>
 
 ## AWS Deployment Order
 
