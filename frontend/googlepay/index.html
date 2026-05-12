@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    
+  <meta name="author" content="Veera Sir">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                const user = JSON.parse(localStorage.getItem('googleStoreUser') || 'null');
+                if (!user || !user.email) {
+                    window.location.replace('/?auth=login&redirect=' + encodeURIComponent(window.location.pathname));
+                }
+            } catch (e) {
+                window.location.replace('/?auth=login&redirect=' + encodeURIComponent(window.location.pathname));
+            }
+        })();
+    </script>
     <title>Google Pay</title>
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png">
     <!-- Google Fonts -->
@@ -44,8 +58,9 @@
             background: var(--gradient);
             color: white;
             padding: 1rem 0;
-            position: relative;
+            position: fixed;
             width: 100%;
+            top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
@@ -292,21 +307,6 @@
             margin-bottom: 0.5rem;
             border-radius: 8px;
         }
-        .jio-symbol {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 0.5rem;
-            border-radius: 50%;
-            background: #0a4abf;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2);
-        }
         .plan-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -423,34 +423,6 @@
             border-top: 2px dashed #dee2e6;
             padding-top: 1rem;
             margin-top: 1rem;
-        }
-        .scanner-payment {
-            display: grid;
-            grid-template-columns: minmax(160px, 220px) 1fr;
-            gap: 1rem;
-            align-items: center;
-            background: var(--light);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        .scanner-payment img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: contain;
-            background: white;
-            border-radius: 10px;
-            padding: 0.75rem;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-        }
-        .scanner-payment h4 {
-            margin: 0 0 0.35rem;
-            color: var(--dark);
-        }
-        .scanner-payment p {
-            margin: 0;
-            color: var(--gray);
-            line-height: 1.5;
         }
         /* Features */
         .features {
@@ -580,14 +552,6 @@
         }
         /* Responsive */
         @media (max-width: 768px) {
-            .scanner-payment {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .scanner-payment img {
-                max-width: 220px;
-                margin: 0 auto;
-            }
             .nav-links {
                 display: none;
                 position: absolute;
@@ -687,43 +651,45 @@
             background: var(--danger);
         }
     </style>
-<style>
-.home-back-button {
-  position: absolute;
-  top: 88px;
-  left: 20px;
-  z-index: 1400;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: rgba(12, 18, 28, 0.92);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
-}
-@media (max-width: 640px) {
-  .home-back-button {
-    top: 82px;
-    left: 12px;
-    padding: 8px 14px;
+<style id="store-home-button-style">
+  .store-home-button {
+    position: fixed;
+    left: 18px;
+    top: 18px;
+    z-index: 99999;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #2874f0;
+    color: #fff !important;
+    font-family: Arial, sans-serif;
     font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.22);
   }
-}
+  .store-home-button:hover { background: #1557d0; }
+  .store-home-button:focus { outline: 3px solid rgba(40,116,240,.28); outline-offset: 3px; }
+  @media (max-width: 560px) {
+    .store-home-button { left: 12px; top: 12px; padding: 9px 13px; }
+  }
 </style>
-  <link rel="stylesheet" href="/mobile.css">
 </head>
 <body>
-<!-- Loading Screen -->
+  <a class="store-home-button" href="/" aria-label="Back to all services">Home</a>
+    <!-- Loading Screen -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
         <p>Processing your recharge...</p>
     </div>
     <!-- Header -->
     <header>
-        <nav>
+        
+  <meta name="author" content="Veera Sir">
+<nav>
             <div class="logo">
                 <i class="fab fa-google-pay"></i>
                 Google Pay
@@ -738,7 +704,7 @@
                 <script>
                     function poperror(e) {
                         e.preventDefault();
-                        showToast("abinash did not allow, please contact abinash", "error");
+                        showToast("Veera Sir did not allow, please contact Veera Sir", "error");
                     }
                 </script>
             </ul>
@@ -748,7 +714,7 @@
                     if(errorOffer) {
                         errorOffer.addEventListener('click', function(e){
                             e.preventDefault();
-                            showToast("abinash did not allow, please contact abinash", "error");
+                            showToast("Veera Sir did not allow, please contact Veera Sir", "error");
                         });
                     }
                     function showToast(message, type) {
@@ -809,7 +775,7 @@
                                 <p>Airtel</p>
                             </div>
                             <div class="operator-card" data-operator="jio">
-                                <div class="jio-symbol" aria-label="Jio">Jio</div>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Reliance_Jio_Logo.svg/1200px-Reliance_Jio_Logo.svg.png?20230222155652" alt="Jio">
                                 <p>Jio</p>
                             </div>
                             <div class="operator-card" data-operator="vi">
@@ -1043,7 +1009,7 @@
                         "Total Amount: " + total + "\n" +
                         "Transaction ID: GPAY-" + date.getTime() + "\n" +
                         "----------------------------------------\n" +
-                        "Thank you for using Google Pay! by abinash";
+                        "Thank you for using Google Pay! by Veera Sir";
                     // Download as text file
                     var blob = new Blob([receiptTxt], {type: "text/plain"});
                     var link = document.createElement("a");
@@ -1126,9 +1092,9 @@
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             if (typeof showToast === 'function') {
-                                showToast("admin did not allow, please contact abinash", "error");
+                                showToast("admin did not allow, please contact Veera Sir", "error");
                             } else {
-                                alert("admin did not allow, please contact abinash");
+                                alert("admin did not allow, please contact Veera Sir");
                             }
                         });
                     });
@@ -1143,7 +1109,7 @@
             </div>
         </div>
         <div class="copyright">
-            © 2025 Google Pay. All rights reserved multicloud dveops .
+            © 2025 Google Pay. All rights reserved by Veera Sir .
         </div>
     </footer>
     <!-- Toast Notification -->
@@ -1152,56 +1118,6 @@
         <span id="toastMessage"></span>
     </div>
     <script>
-        const SERVICE_API_QUEUE_KEY = "googleStoreApiQueue";
-        const USER_KEY = "googleStoreUser";
-
-        function getCurrentUser() {
-            try {
-                return JSON.parse(localStorage.getItem(USER_KEY) || "null");
-            } catch (error) {
-                return null;
-            }
-        }
-
-        function queueMainIndexRequest(path, body, method = 'POST') {
-            let queue = [];
-            try {
-                queue = JSON.parse(localStorage.getItem(SERVICE_API_QUEUE_KEY) || "[]");
-            } catch (error) {
-                queue = [];
-            }
-            queue.push({
-                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-                path,
-                method,
-                body,
-                source: "googlepay"
-            });
-            localStorage.setItem(SERVICE_API_QUEUE_KEY, JSON.stringify(queue));
-        }
-
-        async function sendBackendRequest(path, body, method = 'POST') {
-            try {
-                const response = await fetch(`/api${path}`, {
-                    method,
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(body)
-                });
-                const data = await response.json().catch(() => ({}));
-                if (!response.ok) {
-                    throw new Error(data.error || response.statusText || 'Backend request failed');
-                }
-                return data;
-            } catch (error) {
-                queueMainIndexRequest(path, body, method);
-                return {
-                    queued: true,
-                    email_queued: false,
-                    email_message: "Backend unavailable. Receipt email will send after the main page syncs this recharge."
-                };
-            }
-        }
-
         // Sample Plans Data
         const plans = {
             airtel: {
@@ -1430,13 +1346,6 @@
             let formHTML = '';
             if (method === 'upi') {
                 formHTML = `
-                    <div class="scanner-payment">
-                        <img src="scan.jpg" alt="UPI scanner code">
-                        <div>
-                            <h4>Scan and pay</h4>
-                            <p>Use any UPI app to scan this code, then tap Pay Now to save your recharge.</p>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label>UPI ID</label>
                         <div class="input-group">
@@ -1510,15 +1419,24 @@
             }
             document.getElementById('summaryTotal').textContent = `₹${selectedAmount}`;
         }
+        const API_BASE = '/api';
+        const USER_KEY = 'googleStoreUser';
+        function getCurrentUser() {
+            try {
+                return JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+            } catch (err) {
+                return null;
+            }
+        }
+
         // Form Submission
         rechargeForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             if (!validateCurrentStep()) return;
-
-            const currentUser = getCurrentUser();
-            if (!currentUser || !currentUser.email) {
-                showToast('Please login on the home page before making a payment.', 'error');
+            const user = getCurrentUser();
+            if (!user || !user.email) {
+                showToast('Please login on the home page before recharge.', 'error');
                 return;
             }
 
@@ -1529,21 +1447,22 @@
 
             try {
                 const mobile = document.getElementById('mobile').value;
-                const planName = selectedPlan
-                    ? `${selectedPlan.amount} - ${selectedPlan.details}`
-                    : `Custom Amount ${selectedAmount}`;
-                const transactionReference = `GPAY-${Date.now()}`;
-
-                const rechargeResponse = await sendBackendRequest('/recharges', {
-                    email: currentUser.email,
-                    mobile_number: mobile,
-                    operator_name: selectedOperator,
-                    plan_name: planName,
-                    amount: selectedAmount,
-                    payment_method: selectedPaymentMethod,
-                    status: 'success',
-                    transaction_reference: transactionReference
+                const res = await fetch(`${API_BASE}/recharges`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: user.email,
+                        mobile_number: mobile,
+                        operator_name: selectedOperator,
+                        plan_name: selectedPlan ? selectedPlan.details : 'Custom Amount',
+                        amount: selectedAmount,
+                        payment_method: selectedPaymentMethod,
+                        status: 'success',
+                        transaction_reference: `recharge-${Date.now()}`
+                    })
                 });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Recharge failed');
 
                 loading.style.display = 'none';
                 payBtn.disabled = false;
@@ -1553,7 +1472,7 @@
                 document.querySelector('.recharge-card > form').style.display = 'none';
                 successMessage.style.display = 'block';
 
-                showToast(rechargeResponse.email_message || 'Recharge saved. Receipt email is being sent.', 'success');
+                showToast('Recharge successful! ₹' + selectedAmount + ' added to your mobile.', 'success');
 
                 // After success, strictly DON'T reload or go to home, even on touch or click
                 // Listen to touches/clicks on the success message, but block navigation or reload
@@ -1575,11 +1494,11 @@
                     successMessage.removeEventListener('click', blockInteraction);
                     successMessage.removeEventListener('touchstart', blockInteraction);
                 }, 5000);
-            } catch (error) {
+            } catch (err) {
                 loading.style.display = 'none';
                 payBtn.disabled = false;
                 payBtn.innerHTML = 'Pay Now <i class="fas fa-lock"></i>';
-                showToast(error.message || 'Payment failed. Please try again.', 'error');
+                showToast(err.message, 'error');
             }
         });
         function resetForm() {
@@ -1670,8 +1589,5 @@
         });
         
     </script>
-  <script src="/image-fallback.js" defer></script>
-  <script src="/session-watchdog.js" defer></script>
 </body>
 </html>
-

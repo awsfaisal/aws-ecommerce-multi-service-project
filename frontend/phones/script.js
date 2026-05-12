@@ -10,17 +10,18 @@ const catalog = {
     {id:'e5',name:'Google Router',price:5499,img:'https://via.placeholder.com/600x400?text=Router',rating:4.2,desc:'Fast mesh wifi.'}
   ],
   phones: [
-    {id:'p1',name:'Pixel 9',price:59999,img:'https://via.placeholder.com/600x400?text=Pixel9',rating:4.7,desc:'Flagship phone with AI camera.'},
-    {id:'p2',name:'Pixel Fold',price:129999,img:'https://via.placeholder.com/600x400?text=Fold',rating:4.6,desc:'Foldable display innovation.'},
-    {id:'p3',name:'Pixel 9a',price:29999,img:'https://via.placeholder.com/600x400?text=9a',rating:4.2,desc:'Value flagship.'},
-    {id:'p4',name:'Pixel Watch',price:19999,img:'https://via.placeholder.com/600x400?text=Watch',rating:4.1,desc:'Smart wearable.'}
+    {id:'p1', name:'Pixel 10', price:99800, img:'https://www.lesmobiles.com/upload/media/Google_Pixel-10-Pro-concept_intro.jpg', rating:4.7, desc:'AI camera.'},
+    {id:'p2', name:'Pixel Fold', price:129999, img:'https://media.wired.com/photos/6453efc6daed59ebbf4608a7/master/w_2560%2Cc_limit/Google-Pixel-Fold-News-Gear.jpg', rating:4.6, desc:'Foldable display innovation.'},
+    {id:'p3', name:'Pixel 9a', price:29999, img:'https://a.mktgcdn.com/p/EN8VOEChVDriJBDCJDv88rjJUN1BOHDsTH84a3JwN-Q/350x350.png', rating:4.2, desc:'Value flagship.'},
+    {id:'p4', name:'Pixel Watch', price:19999, img:'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/pixelwatch2-header70.jpg', rating:4.1, desc:'Smart wearable.'},
+    {id:'p5', name:'Pixel 9', price:59999, img:'https://store.ee.co.uk/images/product/uni2/DigitalContent/600x450/ht/HTFN_3050C0AE-319F-4429-AB79-0CDA06F64687_large.jpg', rating:4.1, desc:'Flagship phone with AI camera.'},
+    {id:'p6', name:'Pixel 10 XL', price:109999, img:'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1FCrEq.img?w=1280&h=720&m=4&q=70', rating:5, desc:'Powered by the Google Tensor G5 chipset.'}
+
   ],
   computers: [
-    {id:'c1',name:'Pixelbook Go',price:84999,img:'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6382/6382914_sd.jpg',rating:4.5,desc:'Ultra-portable Chromebook.'},
-    {id:'c2',name:'Chromebox',price:44999,img:'https://www.extremetech.com/wp-content/uploads/2014/02/asus-chromebox-front.jpg',rating:4.0,desc:'Compact desktop.'},
-    {id:'c3',name:'Pixel Slate',price:69999,img:'https://overeview.com/wp-content/uploads/2020/11/google-pixel-slate.jpg',rating:4.3,desc:'Tablet + keyboard.'},
-    {id:'c4',name:'Google Pixelbook ',price:79999,img:'https://images-cdn.ubuy.co.in/66f98b2336558055e6125f9d-google-pixelbook-i7-16-gb-ram-512-gb.jpg',rating:4.3,desc:'pixelbook'}
-
+    {id:'c1',name:'Pixelbook Go',price:84999,img:'https://via.placeholder.com/600x400?text=Pixelbook',rating:4.5,desc:'Ultra-portable Chromebook.'},
+    {id:'c2',name:'Chromebox',price:44999,img:'https://via.placeholder.com/600x400?text=Chromebox',rating:4.0,desc:'Compact desktop.'},
+    {id:'c3',name:'Pixel Slate',price:69999,img:'https://via.placeholder.com/600x400?text=Slate',rating:4.3,desc:'Tablet + keyboard.'}
   ],
   earphones: [
     {id:'b1',name:'Pixel Buds A',price:3999,img:'https://via.placeholder.com/600x400?text=BudsA',rating:4.2,desc:'Comfortable daily buds.'},

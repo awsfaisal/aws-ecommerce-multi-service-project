@@ -220,8 +220,8 @@ def build_order_receipt(order_payload):
     ) or "No item details found."
 
     text_body = (
-        f"Hello {order_payload['shipping_name']},\n\n"
-        f"Your Google Store order #{order_payload['id']} has been placed successfully.\n\n"
+        f"Hello Narni {order_payload['shipping_name']},\n\n"
+        f"Your Google Store order In  Multicloud Devops by Veera Sir Nareshit Microservices Ecommerce website #{order_payload['id']} has been placed successfully.\n\n"
         "Customer Details\n"
         "----------------\n"
         f"Name: {order_payload['shipping_name']}\n"
@@ -352,7 +352,7 @@ def send_order_receipt_email_async(order_payload):
 def build_recharge_receipt(recharge_payload):
     text_body = (
         f"Hello {recharge_payload['email']},\n\n"
-        f"Your Google Pay recharge #{recharge_payload['id']} has been saved successfully.\n\n"
+        f"Your Google Pay recharge In  Multicloud Devops by Veera Sir Nareshit Microservices Ecommerce website #{recharge_payload['id']} has been saved successfully.\n\n"
         "Recharge Details\n"
         "----------------\n"
         f"Mobile Number: {recharge_payload['mobile_number']}\n"
@@ -527,7 +527,7 @@ def signup_request():
             sender=app.config["MAIL_USERNAME"],
             recipients=[email],
         )
-        msg.body = f"Hello {username}, your registration OTP is {otp}. It expires in 10 minutes."
+        msg.body = f"Hello {username},harshi your registration OTP for Multicloud Devops by Veera Sir Nareshit Microservices Ecommerce website is {otp}. It expires in 10 minutes."
         mail.send(msg)
         return jsonify({"message": "OTP sent to email!"}), 200
     except Exception as exc:
@@ -652,7 +652,7 @@ def login_request():
             sender=app.config["MAIL_USERNAME"],
             recipients=[email],
         )
-        msg.body = f"Your login OTP is {otp}. It expires in 5 minutes."
+        msg.body = f"Your login OTP for Multicloud Devops by Veera Sir Nareshit Microservices Ecommerce website is {otp}. It expires in 5 minutes."
         mail.send(msg)
         return jsonify({"message": "OTP sent to email", "otp_required": True}), 200
     except Exception as exc:

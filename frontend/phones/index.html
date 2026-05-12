@@ -5,17 +5,18 @@
   <meta name="author" content="Veera Sir">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Google Store — Computers</title>
-<link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png">
+<title>Google Store — Phones</title>
+<link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png"> 
 <meta name="description" content="Advanced demo e-commerce template: animations, carousel, cart, filters, offline" />
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js" defer></script>
 <script src="https://unpkg.com/feather-icons" defer></script>
+<!-- For QR code generator -->
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <style id="store-home-button-style">
   .store-home-button {
     position: fixed;
@@ -43,31 +44,34 @@
   }
 </style>
 </head>
-<body data-category="computers" data-theme="dark">
+<body data-category="phones" data-theme="dark">
   <a class="store-home-button" href="/" aria-label="Back to all services">Home</a>
-<!-- Dynamic Preloader -->
 <div id="preloader" class="preloader" role="status" aria-live="polite">
   <div class="loader">
-    <svg viewBox="0 0 100 100" class="spin animate__animated animate__pulse animate__infinite"><circle cx="50" cy="50" r="40"></circle></svg>
-    <div class="loader-text animate__animated animate__flash animate__infinite">Loading Google Store...</div>
+    <svg viewBox="0 0 100 100" class="spin"><circle cx="50" cy="50" r="40"></circle></svg>
+    <div class="loader-text">Loading Google Store...</div>
   </div>
 </div>
 
-<header class="site-header animate__animated animate__fadeInDown" role="banner">
+<header class="site-header" role="banner">
   
   <meta name="author" content="Veera Sir">
 <div class="nav-inner container">
-    <span class="brand-text">
-    <img src="https://latestlogo.com/wp-content/uploads/2024/01/google-store-logo.png" alt="Google Store Logo" style="width:132px; height:66px; object-fit:contain; vertical-align:middle; margin-left:6px;">
-    </span>
+      <span class="brand-text">
+       <img src="https://latestlogo.com/wp-content/uploads/2024/01/google-store-logo.png" alt="Google Store Logo" style="width:132px; height:66px; object-fit:contain; vertical-align:middle; margin-left:6px;">
+      </span>
+    </a>
     <nav class="main-nav" aria-label="Primary">
       <ul>
-        <li><a href="/computers" class="active">Computers</a></li>
+        <li><a href="/electronics" class="">Electronics</a></li>
+        <li><a href="/phones" class="active">Phones</a></li>
+        <li><a href="/computers" class="">Computers</a></li>
+        <li><a href="/earphones" class="">Earphones</a></li>
       </ul>
     </nav>
     <div class="nav-actions">
       <div class="search-wrap">
-        <input id="search" type="search" placeholder="Search products..." aria-label="Search products" class="animate__animated">
+        <input id="search" type="search" placeholder="Search products..." aria-label="Search products">
         <button id="clearSearch" class="icon-btn" title="Clear search" aria-hidden="true">✕</button>
       </div>
       <button id="viewToggle" class="icon-btn" title="Toggle view" aria-pressed="false">🔁</button>
@@ -85,8 +89,8 @@
 
 <main class="container main" role="main">
   <section class="hero">
-    <div class="hero-left reveal animate__animated animate__fadeInLeft">
-      <h1 id="page-title">Computers</h1>
+    <div class="hero-left reveal">
+      <h1 id="page-title">Phones</h1>
       <p class="lead" id="page-sub"></p>
       <div class="hero-cta">
         <button id="browseAll" class="btn primary">Browse all</button>
@@ -96,7 +100,7 @@
         <div class="muted">Free shipping | Secure checkout</div>
       </div>
     </div>
-    <div class="hero-right reveal animate__animated animate__fadeInRight">
+    <div class="hero-right reveal">
       <div class="hero-card floating" id="hero-feature">
         <img id="hero-image" src="https://via.placeholder.com/420x280?text=Feature" alt="Featured product" loading="lazy">
         <div class="hero-info">
@@ -107,9 +111,9 @@
     </div>
   </section>
 
-  <section class="controls reveal animate__animated animate__fadeInUp">
+  <section class="controls reveal">
     <div class="controls-left">
-      <label>Sort:
+      <label for="sort">Sort:
         <select id="sort" onchange="this.blur();">
           <option value="featured">Featured</option>
           <option value="price-asc">Price: Low → High</option>
@@ -148,9 +152,8 @@
   </section>
 </main>
 
-<!-- Quickview Modal (Modal for product quickview, removed transparency here) -->
-<div id="modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" style="background: #191919;">
-  <div class="modal-card animate__animated" role="document">
+<div id="modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="modal-card" role="document">
     <button id="modalClose" class="close" aria-label="Close">✕</button>
     <div class="modal-grid">
       <div class="modal-media"><img id="modalImg" src="" alt="" loading="lazy"></div>
@@ -167,7 +170,7 @@
   </div>
 </div>
 
-<aside id="cart" class="cart animate__animated" aria-label="Shopping cart" aria-hidden="true" style="background: #000;">
+<aside id="cart" class="cart" style="background: #000;" aria-label="Shopping cart" aria-hidden="true">
   <div class="cart-header">
     <h3>Cart</h3>
     <button id="cartClose" class="close" aria-label="Close">✕</button>
@@ -185,7 +188,7 @@
   </div>
 </aside>
 
-
+  
 <!-- Payment Modal -->
 <div id="paymentModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" style="display:none">
   <div class="modal-card" role="document" style="max-width: 480px;">
@@ -368,8 +371,7 @@ function getCustomerName() {
       return nameInput.value.trim();
     }
   }
-  // If no user info, send as 'Unknown' as per instructions
-  return "Unknown";
+  return "Veera Sir";
 }
 function getCustomerMobile() {
   let activeTab = window._currentPaymentTab || 'UPI';
@@ -382,8 +384,7 @@ function getCustomerMobile() {
       return mobileInput.value.trim();
     }
   }
-  // If no user info, send as '0000000000' as per instructions
-  return "0000000000";
+  return "6202965190";
 }
 function isValidMobile(mobile) {
   return /^[0-9]{10,14}$/.test(mobile);
@@ -400,6 +401,7 @@ function isCustomerFormValid() {
   }
   return true;
 }
+
 // Payment Modal Logic
 const paymentModal = document.getElementById('paymentModal');
 const paymentTabs = {
@@ -456,110 +458,130 @@ function copyUPIID() {
   alert("UPI ID Copied: " + input.value);
 }
 
-// =========================
-// AUTO GENERATE + UPLOAD RECEIPT
-// =========================
-
-// Upload receipt to backend API
-// NOTE: 'mobile' is NOT sent anymore due to backend MySQL schema error.
-async function uploadReceiptToS3(receiptText, customerMobile) {
+// --- Upload helper (talks to Flask/S3) ---
+// Send receipt copy for admin (Veera Sir) record purposes
+async function uploadReceiptToS3(receiptText, mobile) {
   try {
     const now = Date.now();
-    const receiptFileName = `GoogleStoreReceipt_${customerMobile}_${now}.txt`;
-    const res = await fetch("http://18.181.35.96:5001/save-receipts", {
+    const receiptFileName = `GoogleStoreReceipt_${mobile}_${now}.txt`;
+    const res = await fetch("http://18.181.35.96/upload_receipt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // Remove 'mobile' field from payload due to backend column error
       body: JSON.stringify({
-        filename: receiptFileName,
-        receipt_text: receiptText
+        receipt_text: receiptText,
+        mobile: mobile,
+        receipt_filename: receiptFileName
       })
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Upload failed");
-    console.log("Receipt Saved:", data);
-    alert("A copy of your receipt has been saved.");
-    return data;
+    // Only show this info: receipt copy saved to admin Veera Sir
+    alert("A copy of your receipt has been saved by admin (Veera Sir).");
+    return data.s3_url;
   } catch (err) {
-    console.error("Upload Error:", err);
     alert("Error uploading receipt: " + err.message);
+    console.error("❌ Error uploading receipt:", err);
   }
 }
 
-// Main function: Generate + Upload the Receipt
-async function autoSendReceiptToS3() {
-  // Always use fallback values for "Customer Name" and "Mobile" if blank, and always send the section
-  let customerName = getCustomerName();
-  let customerMobile = getCustomerMobile();
-  if (!customerName || customerName.trim() === "") customerName = "Unknown";
-  if (!customerMobile || customerMobile.trim() === "") customerMobile = "0000000000";
-  const date = new Date();
-  const total = document.getElementById("totalPaymentAmount")?.textContent || "0";
-  const products = extractCartProducts();
-
-  // Format product lines
-  let itemsText = "Products Purchased:\n";
-  if (products.length > 0) {
-    products.forEach(p => {
-      itemsText += `- ${p.name || ''} | Qty: ${p.qty || ''} | Price: ${p.price || ''}\n`;
-    });
-  } else {
-    // Always show this section, even if no products
-    itemsText += "- No product details found\n";
-  }
-
-  // Always include Customer Name and Mobile lines, even if default values
-  const receiptText = `
-Google Store Receipt
--------------------------------------
-Date: ${date.toLocaleString()}
-Customer Name: ${customerName}
-Mobile: ${customerMobile}
-${itemsText}
--------------------------------------
-Total Paid: ${total}
-Payment Successful!
--------------------------------------
-Developed by: Veera Sir
-  `.trim();
-
-  // Upload the receipt (do NOT send 'mobile' field in payload)
-  await uploadReceiptToS3(receiptText, customerMobile);
-}
-
-// =========================
-// CALL THIS WHEN PAYMENT SUCCESS
-// =========================
-// Example:
-// document.getElementById("paymentSuccessBtn").addEventListener("click", autoSendReceiptToS3);
-
-
-// Download receipt as text file (with products and customer info)
-function downloadReceipt() {
-  // Always use fallback values for "Customer Name" and "Mobile" if blank, and always send the section
-  let customerName = getCustomerName();
-  let customerMobile = getCustomerMobile();
-  if (!customerName || customerName.trim() === "") customerName = "Unknown";
-  if (!customerMobile || customerMobile.trim() === "") customerMobile = "0000000000";
+// --- Enhanced: receipt with product, purchased details, customer info and product small image
+async function viewReceipt() {
+  const customerName = getCustomerName();
+  const customerMobile = getCustomerMobile();
   const date = new Date();
   const total = document.getElementById('totalPaymentAmount').textContent;
-  let products = extractCartProducts();
-  let itemsText = 'Products Purchased:\n';
+  const products = extractCartProducts();
+  let itemsText = '';
+  let itemsHTML = '';
 
   if (products.length > 0) {
+    itemsText += 'Products Purchased:\n';
+    itemsHTML = `<table style="width:100%;border-collapse:collapse;font-size:1em;">
+      <thead>
+        <tr>
+          <th style="border-bottom:1px solid #eee;text-align:left;padding:4px 0;">Product</th>
+          <th style="border-bottom:1px solid #eee;text-align:center;padding:4px 0;">Qty</th>
+          <th style="border-bottom:1px solid #eee;text-align:right;padding:4px 0;">Price</th>
+        </tr>
+      </thead><tbody>`;
     products.forEach(p => {
-      itemsText += `- ${p.name || 'Product'}${p.desc ? ` (${p.desc})`:''} | Qty: ${p.qty || 1} | Price: ${p.price || ''}\n`;
+      itemsText += `- ${p.name || 'Product'} | Qty: ${p.qty || 1} | Price: ${p.price || ''}\n`;
+      itemsHTML += `
+        <tr>
+          <td style="padding:3px 0;">${p.name}</td>
+          <td style="text-align:center;">${p.qty}</td>
+          <td style="text-align:right;">${p.price}</td>
+        </tr>`;
     });
+    itemsHTML += `</tbody></table>`;
   } else {
-    // Always show this header, even if no products
-    itemsText += "- No product details found\n";
+    itemsText = '- Purchased Phones\n';
+    itemsHTML = 'Purchased Phones';
   }
 
   const lines = [
     'Google Store Receipt',
     '----------------------------',
     `Date: ${date.toLocaleString()}`,
-    `Customer Name: ${customerName}`,
+  ];
+  lines.push(`Name: ${customerName}`);
+  lines.push(`Mobile: ${customerMobile}`);
+  lines.push(itemsText.trim());
+  lines.push('----------------------------');
+  lines.push(`Total Paid: ${total}`);
+  lines.push('Payment Successful!');
+  lines.push('----------------------------');
+  lines.push('Developed by Veera Sir');
+
+  const receiptText = lines.join('\n');
+
+  let htmlCustomer = '';
+  htmlCustomer += `<div style="font-size:1.05em;margin-bottom:4px;"><b>Name:</b> ${customerName}</div>`;
+  htmlCustomer += `<div style="font-size:1.05em;margin-bottom:10px;"><b>Mobile:</b> ${customerMobile}</div>`;
+
+  const receiptHtml = `
+    <div style="font-family:sans-serif;max-width:430px;margin:0 auto;border:1px solid #eee;border-radius:8px;padding:24px;box-shadow:0 2px 8px #0002;">
+      <h2 style="text-align:center;color:#4dd784;margin-top:0;">Google Store - Receipt</h2>
+      <div style="font-size:1.05em;margin:10px 0;"><b>Date:</b> ${date.toLocaleString()}</div>
+      ${htmlCustomer}
+      <div style="margin:15px 0 14px 0;"><b>Purchased Items:</b></div>
+      <div style="margin-bottom:12px">${itemsHTML}</div>
+      <div style="font-size:1.2em;margin-bottom:20px;"><b>Total Paid:</b> <span style="color:#4dd784;">${total}</span></div>
+      <div style="margin-bottom:18px;color:#5c5c5c;">Payment Successful via Card/NetBanking/UPI</div>
+      <div style="font-size:0.9em;color:#333;text-align:center;">Developed by Veera Sir</div>
+    </div>
+  `;
+  const win = window.open("", "_blank", "width=480,height=600");
+  if (win) {
+    win.document.write("<title>Google Store Receipt</title>");
+    win.document.write(receiptHtml);
+    win.document.close();
+  }
+}
+
+// Download receipt as text file (with products and customer info)
+function downloadReceipt() {
+  const customerName = getCustomerName();
+  const customerMobile = getCustomerMobile();
+  const date = new Date();
+  const total = document.getElementById('totalPaymentAmount').textContent;
+  let products = extractCartProducts();
+  let itemsText = '';
+  
+  if (products.length > 0) {
+    itemsText += 'Products Purchased:' + "\n";
+    products.forEach(p => {
+      itemsText += `- ${p.name || 'Product'}${p.desc ? ` (${p.desc})`:''} | Qty: ${p.qty || 1} | Price: ${p.price || ''}\n`;
+    });
+  } else {
+    itemsText = '- Purchased Phones\n';
+  }
+
+  const lines = [
+    'Google Store Receipt',
+    '----------------------------',
+    `Date: ${date.toLocaleString()}`,
+    `Name: ${customerName}`,
     `Mobile: ${customerMobile}`,
     itemsText.trim(),
     '----------------------------',
@@ -649,6 +671,43 @@ async function handlePaymentDone(method) {
   clearCartAfterPayment();
 }
 
+// Helper generates receipt and uploads to S3 per mobile-number _every_ time payment is done, always new file
+async function autoSendReceiptToS3() {
+  const customerName = getCustomerName();
+  const customerMobile = getCustomerMobile();
+  const date = new Date();
+  const total = document.getElementById('totalPaymentAmount').textContent;
+  const products = extractCartProducts();
+  let itemsText = '';
+
+  if (products.length > 0) {
+    itemsText += 'Products Purchased:\n';
+    products.forEach(p => {
+      itemsText += `- ${p.name || 'Product'} | Qty: ${p.qty || 1} | Price: ${p.price || ''}\n`;
+    });
+  } else {
+    itemsText = '- Purchased Phones\n';
+  }
+
+  const lines = [
+    'Google Store Receipt',
+    '----------------------------',
+    `Date: ${date.toLocaleString()}`,
+    `Name: ${customerName}`,
+    `Mobile: ${customerMobile}`,
+    itemsText.trim(),
+    '----------------------------',
+    `Total Paid: ${total}`,
+    'Payment Successful!',
+    '----------------------------',
+    'Developed by Veera Sir'
+  ];
+  const receiptText = lines.join('\n');
+
+  // ALWAYS save as new S3 file named for this mobile and this unique timestamp
+  await uploadReceiptToS3(receiptText, customerMobile);
+}
+
 // Attach event to checkout button
 document.addEventListener('DOMContentLoaded', function() {
   const checkoutBtn = document.getElementById('checkout');
@@ -707,11 +766,9 @@ paymentModal.addEventListener('mousedown', function(e) {
     closePaymentModal();
 });
 
-  
 </script>
 </body>
 </html>
-
 
 
 

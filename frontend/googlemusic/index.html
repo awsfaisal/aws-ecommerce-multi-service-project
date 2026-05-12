@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    
+  <meta name="author" content="Veera Sir">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            try {
+                const user = JSON.parse(localStorage.getItem('googleStoreUser') || 'null');
+                if (!user || !user.email) {
+                    window.location.replace('/?auth=login&redirect=' + encodeURIComponent(window.location.pathname));
+                }
+            } catch (e) {
+                window.location.replace('/?auth=login&redirect=' + encodeURIComponent(window.location.pathname));
+            }
+        })();
+    </script>
     <title>Google Music</title>
     <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -624,35 +638,36 @@ body {
 }
 </style>
 
-<style>
-.home-back-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 250;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: rgba(12, 18, 28, 0.92);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
-}
-@media (max-width: 640px) {
-  .home-back-button {
-    top: 12px;
-    left: 12px;
-    padding: 8px 14px;
+<style id="store-home-button-style">
+  .store-home-button {
+    position: fixed;
+    left: 18px;
+    top: 18px;
+    z-index: 99999;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #2874f0;
+    color: #fff !important;
+    font-family: Arial, sans-serif;
     font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.22);
   }
-}
+  .store-home-button:hover { background: #1557d0; }
+  .store-home-button:focus { outline: 3px solid rgba(40,116,240,.28); outline-offset: 3px; }
+  @media (max-width: 560px) {
+    .store-home-button { left: 12px; top: 12px; padding: 9px 13px; }
+  }
 </style>
-  <link rel="stylesheet" href="/mobile.css">
 </head>
-<div class="music-player-container">
+<body>
+  <a class="store-home-button" href="/" aria-label="Back to all services">Home</a>
+    <div class="music-player-container">
         <div class="sidebar">
             <div class="logo">
                 <img src="https://images.genius.com/59a92f849e980e83af49a57ca3167295.1000x1000x1.jpg" alt="Music Player Logo" class="logo-img">
@@ -777,7 +792,7 @@ body {
             <div style="font-size:1.25rem;font-weight:bold;margin-bottom:14px;">
                 Warning!<br>
                 Admin did not allow.<br>
-                Please contact admin: veerasir nareshit
+                Please contact admin: Veera Sir
             </div>
             <button onclick="document.getElementById('block-modal').style.display='none'" style="padding:8px 16px;border:none;background:#3498db;color:#fff;border-radius:4px;font-size:1rem;cursor:pointer;">
                 Close
@@ -821,16 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Sahiba", artist: "Aditya Rikhari", src: "https://smooth-coral-mwcsw6ex3k.edgeone.app/Sahiba_Official_Music_Video_Aditya_Rikhari,_Ankita_Chhetri.mp3", cover: "https://c.saavncdn.com/140/Sahiba-Hindi-2023-20231213191015-500x500.jpg", duration: "3:46" },
         { title: "Ranjheya Ve", artist: "Zain Zohaib", src: "https://secret-amber-2uyqkkfbec.edgeone.app/Ranjheya%20Ve%20%20%20Zain%20Zohaib%20%20%20Yratta%20media.mp3", cover: "https://i.ytimg.com/vi/MVvEUAymQFM/maxresdefault.jpg", duration: "3:46" },
         { title: "Zaroor x Tere Bina x Ishq Di Baajiyaan", artist: "Diljit Dosanjh", src: "https://lonely-ivory-eia6uw8et2.edgeone.app/ytmp3free.cc_zaroor-x-tere-bina-x-kabhi-use-noor-noor-kehta-hu-full-song-trending-reels-song-mashup-youtubemp3free.org.mp3", cover: "https://i.ytimg.com/vi/bStQwuVibyI/sddefault.jpg", duration: "4:46" },
-        { title: "SoundHelix Song 1", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80", duration: "6:13" },
-        { title: "SoundHelix Song 2", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=800&q=80", duration: "5:31" },
-        { title: "SoundHelix Song 3", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80", duration: "5:03" },
-        { title: "SoundHelix Song 4", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", cover: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=800&q=80", duration: "5:30" },
-        { title: "SoundHelix Song 5", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", cover: "https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?auto=format&fit=crop&w=800&q=80", duration: "5:27" },
-        { title: "SoundHelix Song 6", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", cover: "https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?auto=format&fit=crop&w=800&q=80", duration: "5:09" },
-        { title: "SoundHelix Song 7", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", cover: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=800&q=80", duration: "6:00" },
-        { title: "SoundHelix Song 8", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", cover: "https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=800&q=80", duration: "5:18" },
-        { title: "SoundHelix Song 9", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3", cover: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=800&q=80", duration: "5:34" },
-        { title: "SoundHelix Song 10", artist: "SoundHelix", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3", cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=800&q=80", duration: "6:10" }
+
     ];
     
     // --- Player state management ---
@@ -1248,7 +1254,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
     </script>
-  <script src="/image-fallback.js" defer></script>
-  <script src="/session-watchdog.js" defer></script>
+
 </body>
 </html>
